@@ -1,0 +1,38 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.join(__dir__, '../lib'))
+require 'nexus_repo_manager'
+
+def environments
+  return @environments unless @environments.nil?
+
+  @environments = Dir[File.join(File.expand_path(File.dirname(__FILE__)), '../configs/*.json')].map do |config|
+    config.split('/').last.split('.').first
+  end
+end
+
+def usage
+  message = "Usage: ./nexus_repo_manager environment\n\n"\
+            "Valid Environments:\n"
+  environments.each do |environment|
+    message += "- #{environment}\n"
+  end
+  message
+end
+
+def invalid?(environment)
+  return false if environments.include?(environment)
+  puts "ERROR: Invalid environment '#{environment}' passed in.\n\n"
+  true
+end
+
+user_supplied_env = ARGV[0]
+if user_supplied_env.nil? || ARGV.count > 1 || invalid?(user_supplied_env)
+  puts usage
+  exit
+end
+
+puts 'Beginning script execution:'
+command_centre = NexusRepoManager::CommandCentre.new(user_supplied_env)
+command_centre.run
+puts "\nScript execution complete."

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# script/test: Run test suite for application. Optionally pass in a path to an
+#              individual test file to run a single test.
+
+bundle exec rspec ${1:+$1}

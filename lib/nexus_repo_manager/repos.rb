@@ -1,0 +1,8 @@
+require 'nexus_repo_manager/repos/repo'
+require 'nexus_repo_manager/repos/docker_repo'
+require 'nexus_repo_manager/repos/maven_repo'
+require 'nexus_repo_manager/repos/npm_repo'
+require 'nexus_repo_manager/repos/pypi_repo'
+require 'nexus_repo_manager/repos/raw_repo'
+require 'nexus_repo_manager/repos/rubygems_repo'
+require 'nexus_repo_manager/repos/yum_repo'
